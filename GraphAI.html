@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAI4FIS@ICDE'26 - Graph AI for Future Intelligent Systems</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #6DD5FA 0%, #2980B9 100%);
+            color: white;
+            padding: 2rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .workshop-title {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .conference-info {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.95;
+        }
+
+        .location-date {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .nav-list li {
+            margin: 0;
+        }
+
+        .nav-list a {
+            display: block;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #2980B9;
+            font-weight: 600;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .nav-list a:hover {
+            background: #6DD5FA;
+            color: white;
+        }
+
+        .content {
+            background: white;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            color: #2980B9;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #6DD5FA;
+        }
+
+        .subsection-title {
+            color: #3498DB;
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        .dates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .date-card {
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .date-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .date-value {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .topics-list {
+            columns: 2;
+            column-gap: 2rem;
+            margin: 1rem 0;
+        }
+
+        .topics-list li {
+            margin-bottom: 0.8rem;
+            break-inside: avoid;
+        }
+
+        .pc-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .pc-member {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-left: 4px solid #3498DB;
+            border-radius: 4px;
+        }
+
+        .pc-member-name {
+            font-weight: 600;
+            color: #2980B9;
+        }
+
+        .pc-member-affiliation {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .chairs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .chair-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid #74ebd5;
+        }
+
+        .chair-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2980B9;
+            margin-bottom: 0.5rem;
+        }
+
+        .chair-affiliation {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+
+        .chair-email {
+            color: #3498DB;
+            font-size: 0.9rem;
+        }
+
+        .chair-email a {
+            color: #3498DB;
+            text-decoration: none;
+        }
+
+        .chair-email a:hover {
+            text-decoration: underline;
+        }
+
+        .highlight-box {
+            background: #e3f2fd;
+            border-left: 5px solid #2196F3;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .submission-info {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #2980B9;
+            color: white;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: background 0.3s;
+            margin-top: 1rem;
+        }
+
+        .btn:hover {
+            background: #3498DB;
+        }
+
+        footer {
+            background: #2980B9;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .workshop-title {
+                font-size: 1.8rem;
+            }
+
+            .topics-list {
+                columns: 1;
+            }
+
+            .nav-list {
+                flex-direction: column;
+            }
+
+            .nav-list a {
+                border-bottom: 1px solid #eee;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="workshop-title">GAI4FIS@ICDE'26</h1>
+            <p class="conference-info">Workshop on Graph AI for Future Intelligent Systems</p>
+            <p class="conference-info">42nd IEEE International Conference on Data Engineering (ICDE)</p>
+            <p class="location-date">📍 Montréal, Canada | 📅 May 4-8, 2026</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <ul class="nav-list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#topics">Topics</a></li>
+            <li><a href="#dates">Important Dates</a></li>
+            <li><a href="#submission">Submission</a></li>
+            <li><a href="#committee">Committee</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <div class="content">
+            <section id="about" class="section">
+                <h2 class="section-title">Workshop Scope</h2>
+                <p>The Workshop on Graph AI for Future Intelligent Systems (GAI4FIS) serves as a premier forum for advancing research at the intersection of graph-based artificial intelligence and next-generation intelligent systems. As modern intelligent systems, spanning cloud-native platforms, IoT ecosystems, and autonomous networks evolve to become increasingly complex, dynamic, and interconnected, they demand advanced intelligence capabilities for managing dependencies, optimizing workflows, and enabling robust, context-aware decision-making.</p>
+                
+                <p style="margin-top: 1rem;">Graph AI, encompassing graph neural networks, graph transformers, knowledge graph reasoning, and neuro-symbolic models, has emerged as a transformative force driving innovation in the design and operation of future intelligent systems. Beyond revolutionary developments such as Graph Foundation Models, self-supervised learning, and the integration of Large Language Models (LLMs) with knowledge graph reasoning, GAI4FIS Workshop expands its focus to explore how these innovations can be operationalized in real-world intelligent service ecosystems.</p>
+
+                <h3 class="subsection-title">Importance and Timeliness</h3>
+                <p>Graph AI is rapidly becoming a cornerstone technology in critical sectors such as healthcare, transportation, energy, and smart living, where understanding complex relationships, dynamic interactions, and making trustworthy real-time decisions is essential. The GAI4FIS Workshop seeks to spotlight innovative research that addresses challenges in scalability, trustworthiness, explainability, and seamless integration into intelligent and service-oriented environments.</p>
+
+                <p style="margin-top: 1rem;">The workshop focuses on areas including automated service composition, adaptive orchestration, predictive maintenance, context-aware personalization, and secure inter-service communication. By combining advanced graph learning techniques with the principles of modular, distributed, and service-oriented architectures, GAI4FIS aims to push the boundaries of what future intelligent systems can achieve.</p>
+            </section>
+
+            <section id="topics" class="section">
+                <h2 class="section-title">Topics Covered</h2>
+                <p>GAI4FIS main topics include (but are not limited to):</p>
+
+                <h3 class="subsection-title">Foundations and Advances in Graph AI</h3>
+                <ul class="topics-list">
+                    <li>Self-supervised and unsupervised graph representation learning</li>
+                    <li>Large Language Models for Knowledge Graphs</li>
+                    <li>Graph Neural Networks (scalability, fairness, Pre-trained GNNs)</li>
+                    <li>Graph AI with LLMs (LLM-Augmented Knowledge Graphs, Graph-Based LLM Fine-Tuning)</li>
+                    <li>AI-generated graphs (privacy-preserving graphs, graph data augmentation)</li>
+                    <li>Federated graph learning</li>
+                    <li>Diffusion Models for Graphs</li>
+                    <li>EdgeAI (e.g., GraphGPT)</li>
+                    <li>Retrieval-Augmented Generation (RAG) using knowledge graphs</li>
+                    <li>Prompt engineering with structured knowledge</li>
+                </ul>
+
+                <h3 class="subsection-title">Explainability, Robustness, and Trust in Graph AI</h3>
+                <ul class="topics-list">
+                    <li>Privacy-preserving graph representation learning</li>
+                    <li>Fairness-aware graph representation learning algorithms</li>
+                    <li>Robustness to adversarial attacks on graphs</li>
+                </ul>
+
+                <h3 class="subsection-title">Graph AI Applications</h3>
+                <ul class="topics-list">
+                    <li>Social networks and recommender systems</li>
+                    <li>Edge and service intelligence</li>
+                    <li>Graph-based Agentic AI and decentralized intelligence</li>
+                    <li>Smart city dimensions (intelligent transportation, smart healthcare)</li>
+                    <li>Legal, financial, and industrial graph applications</li>
+                    <li>Bioinformatics and drug discovery with molecular graphs</li>
+                </ul>
+
+                <h3 class="subsection-title">Graph AI for Service-Oriented Computing</h3>
+                <ul class="topics-list">
+                    <li>Intelligent graph-based modeling of service systems</li>
+                    <li>Generative graph models for service design and management</li>
+                    <li>Few-shot and Zero-shot learning on service graphs</li>
+                    <li>Graph foundation models for intelligent service recommendation and composition</li>
+                    <li>Graph AI and language models for cross-domain service integration</li>
+                    <li>Graph-aware event-driven architecture for service management and evolution</li>
+                    <li>Quantum graph algorithms for service optimization</li>
+                </ul>
+            </section>
+
+            <section id="dates" class="section">
+                <h2 class="section-title">Important Dates</h2>
+                <div class="dates-grid">
+                    <div class="date-card">
+                        <div class="date-label">Submission Deadline</div>
+                        <div class="date-value">February 28, 2026</div>
+                    </div>
+                    <div class="date-card">
+                        <div class="date-label">Notification for Authors</div>
+                        <div class="date-value">March 28, 2026</div>
+                    </div>
+                    <div class="date-card">
+                        <div class="date-label">Camera-Ready</div>
+                        <div class="date-value">April 09, 2026</div>
+                    </div>
+                    <div class="date-card">
+                        <div class="date-label">Workshop Date</div>
+                        <div class="date-value">May 4, 2026</div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="submission" class="section">
+                <h2 class="section-title">Submission Instructions</h2>
+                
+                <div class="submission-info">
+                    <p><strong>We welcome submissions describing original, unpublished work that is not being considered for publication by other venues.</strong></p>
+                </div>
+
+                <p>Manuscripts should follow the latest IEEE proceedings format and be submitted as PDF files. The paper length should not exceed <strong>eight (8) pages</strong> inclusive of everything (e.g., references).</p>
+
+                <a href="https://cmt3.research.microsoft.com/HTAPSys2026" class="btn" target="_blank">Submit Your Paper</a>
+
+                <h3 class="subsection-title">Publication in Proceedings</h3>
+                <p>The proceedings of the workshops will be published jointly alongside with ICDE proceedings. All papers should have the same format as conference research papers.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Conference Website:</strong> <a href="https://icde2026.github.io/cf-research-papers.html" target="_blank">https://icde2026.github.io/cf-research-papers.html</a></p>
+                </div>
+            </section>
+
+            <section id="committee" class="section">
+                <h2 class="section-title">Workshop Co-Chairs</h2>
+                <div class="chairs-grid">
+                    <div class="chair-card">
+                        <div class="chair-name">Wissem Inoubli</div>
+                        <div class="chair-affiliation">CRIL-CNRS & Univ. Artois, Lens, France</div>
+                        <div class="chair-email">Email: <a href="mailto:wissem.inoubli@univ-artois.fr">wissem.inoubli@univ-artois.fr</a></div>
+                    </div>
+                    <div class="chair-card">
+                        <div class="chair-name">Haithem Mezni</div>
+                        <div class="chair-affiliation">Jendouba University, Tunisia</div>
+                        <div class="chair-email">Email: <a href="mailto:haithem.mezni@fsjegj.rnu.tn">haithem.mezni@fsjegj.rnu.tn</a></div>
+                    </div>
+                    <div class="chair-card">
+                        <div class="chair-name">Sabeur Aridhi</div>
+                        <div class="chair-affiliation">LORIA (inria-CNRS), University of Lorraine, Nancy, France</div>
+                        <div class="chair-email">Email: <a href="mailto:sabeur.aridhi@loria.fr">sabeur.aridhi@loria.fr</a></div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title" style="margin-top: 2rem;">Program Committee Members</h3>
+                <div class="pc-members">
+                    <div class="pc-member">
+                        <div class="pc-member-name">Bishnu Sarker</div>
+                        <div class="pc-member-affiliation">Meharry Medical College, TN, USA</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Sarra Hasni</div>
+                        <div class="pc-member-affiliation">University of Tunis, Tunisia</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Wissem Inoubli</div>
+                        <div class="pc-member-affiliation">University of Artois, France</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Haithem Mezni</div>
+                        <div class="pc-member-affiliation">Taibah University, KSA</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Márton Karsai</div>
+                        <div class="pc-member-affiliation">INRIA/ENS de Lyon, France</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Sabeur Aridhi</div>
+                        <div class="pc-member-affiliation">University of Lorraine, France</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Ticiana L. Linhares</div>
+                        <div class="pc-member-affiliation">Federal University of Ceará, Brazil</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Mondher Maddouri</div>
+                        <div class="pc-member-affiliation">Taibah University, Saudi Arabia</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Alberto Montresor</div>
+                        <div class="pc-member-affiliation">University of Trento, Italy</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Nejat Arinik</div>
+                        <div class="pc-member-affiliation">University of Artois, France</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Jan Ramon</div>
+                        <div class="pc-member-affiliation">Katholieke Universiteit Leuven, Belgium</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Shad Kirmani</div>
+                        <div class="pc-member-affiliation">LinkedIn Corporation, NY, USA</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Engelbert Mephu Nguifo</div>
+                        <div class="pc-member-affiliation">University Clermont Auvergne, France</div>
+                    </div>
+                    <div class="pc-member">
+                        <div class="pc-member-name">Salem Benfarhat</div>
+                        <div class="pc-member-affiliation">University of Artois, France</div>
+                    </div>
+                </div>
+
+                <h3 class="subsection-title" style="margin-top: 2rem;">Invited Talks</h3>
+                <p><em>To be announced</em></p>
+            </section>
+
+            <section id="contact" class="section">
+                <h2 class="section-title">Contact Information</h2>
+                <p>For any inquiries regarding the workshop, please contact the workshop co-chairs:</p>
+                <ul style="margin-left: 2rem; margin-top: 1rem;">
+                    <li>Wissem Inoubli: <a href="mailto:wissem.inoubli@univ-artois.fr">wissem.inoubli@univ-artois.fr</a></li>
+                    <li>Haithem Mezni: <a href="mailto:haithem.mezni@fsjegj.rnu.tn">haithem.mezni@fsjegj.rnu.tn</a></li>
+                    <li>Sabeur Aridhi: <a href="mailto:sabeur.aridhi@loria.fr">sabeur.aridhi@loria.fr</a></li>
+                </ul>
+            </section>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 GAI4FIS@ICDE'26 Workshop. All rights reserved.</p>
+            <p style="margin-top: 0.5rem;">Part of the 42nd IEEE International Conference on Data Engineering</p>
+        </div>
+    </footer>
+</body>
+</html>
